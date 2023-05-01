@@ -1,0 +1,2 @@
+# kotlinpractice
+仕事で扱っている昔ながらのJava AndroidをKotlinで実装してみる
