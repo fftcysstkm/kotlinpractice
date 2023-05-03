@@ -1,11 +1,13 @@
 package com.example.kotlinpractice.ui.posts
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpractice.databinding.ActivityPostsBinding
+import com.example.kotlinpractice.ui.postDetail.PostDetailActivity
 import com.example.kotlinpractice.viewmodels.posts.PostsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +32,13 @@ class PostsActivity : AppCompatActivity() {
         // データの変更を監視
         // 投稿一覧データを表示
         val recyclerView = binding.recyclerView
-        val adapter = PostsAdapter()
+        // リストタップで詳細画面に遷移する
+        val adapter = PostsAdapter { post ->
+            val intent = Intent(this, PostDetailActivity::class.java).apply {
+                putExtra(PostDetailActivity.EXTRA_POST, post)
+            }
+            startActivity(intent)
+        }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         viewModel.posts.observe(this) { posts -> adapter.submitList(posts) }

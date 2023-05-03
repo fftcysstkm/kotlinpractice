@@ -10,8 +10,10 @@ import com.example.kotlinpractice.domain.Post
 
 /**
  * 投稿一覧を表示するためのAdapter
+ * @param onItemClicked 一行タップしたときに呼ばれる関数
  */
-class PostsAdapter : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+class PostsAdapter(private val onItemClicked: (Post) -> Unit) :
+    ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     // ViewHolder生成
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -21,7 +23,7 @@ class PostsAdapter : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
     // ビューホルダーにデータの値設定
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
-        holder.bind(post)
+        holder.bind(post, onItemClicked)
     }
 }
 /**
@@ -34,9 +36,15 @@ class PostViewHolder(private val binding: ItemPostBinding) :
      * ビューホルダーにデータの値をセットする
      * @param post 投稿１件のデータ
      */
-    fun bind(post: Post) {
+    fun bind(post: Post, onItemClicked:(Post)->Unit) {
         binding.titleTextView.text = post.title
         binding.bodyTextView.text = post.body
+        itemView.setOnClickListener{
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                onItemClicked(post)
+            }
+        }
     }
 
     companion object {
