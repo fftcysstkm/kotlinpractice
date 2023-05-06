@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kotlinpractice.databinding.ActivityMainBinding
+import com.example.kotlinpractice.ui.booklist.BookListActivity
 import com.example.kotlinpractice.ui.posts.PostsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         // ボタンタップでSecondActivityへ遷移
         binding.nextButton.setOnClickListener {
             val intent = Intent(this, PostsActivity::class.java)
+            startActivity(intent)
+        }
+        binding.toBookListButton.setOnClickListener{
+            val intent = Intent(this, BookListActivity::class.java)
             startActivity(intent)
         }
     }
