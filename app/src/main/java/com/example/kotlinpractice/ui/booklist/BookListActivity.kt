@@ -23,7 +23,8 @@ class BookListActivity : AppCompatActivity() {
         // 一覧データを表示
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = BookListAdapter()
+        // 削除ボタンで、Firestoreのbookを「利用不可」にする
+        val adapter = BookListAdapter { book -> viewModel.updateBookAvailability(book, false) }
         recyclerView.adapter = adapter
         // 区切り線
         val divider = DividerItemDecoration(this, LinearLayoutManager(this).orientation)
