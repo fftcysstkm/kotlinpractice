@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kotlinpractice.databinding.ActivityMainBinding
 import com.example.kotlinpractice.ui.booklist.BookListActivity
+import com.example.kotlinpractice.ui.booklistDataBinding.BookListDataBindingActivity
 import com.example.kotlinpractice.ui.posts.PostsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.toBookListButton.setOnClickListener{
             val intent = Intent(this, BookListActivity::class.java)
+            startActivity(intent)
+        }
+        binding.toBookListDataBindingButton.setOnClickListener{
+            val intent = Intent(this, BookListDataBindingActivity::class.java)
             startActivity(intent)
         }
     }

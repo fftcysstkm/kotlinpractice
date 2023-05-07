@@ -15,13 +15,13 @@ class BookListViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
 
     /**
-     * 本を削除する（availableをfalseにする）
+     * 本を削除、復活させる（availableを反転する）
      * 更新成功したら本を取得し直す。
      */
-    fun updateBookAvailability(book: Book, available: Boolean) {
+    fun updateBookAvailability(book: Book) {
         firestore.collection("books")
             .document(book.id)
-            .update("available", available)
+            .update("available", !book.available)
             .addOnSuccessListener {
                 fetchBooks()
             }

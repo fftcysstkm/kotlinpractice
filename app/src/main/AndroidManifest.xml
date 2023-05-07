@@ -34,6 +34,8 @@
         <activity
             android:name=".ui.booklist.BookListActivity"
             android:exported="true" />
+        <activity android:name=".ui.booklistDataBinding.BookListDataBindingActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
